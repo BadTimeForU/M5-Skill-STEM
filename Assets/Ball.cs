@@ -2,11 +2,22 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] Vector3 velocity = new Vector3(1, 1, 0);
-    [SerializeField] Vector3 acceleration = new Vector3(0, -1, 0);
+    [SerializeField] private Vector3 velocity = new Vector3(1, 1, 0);
+    [SerializeField] private Vector3 acceleration = new Vector3(0, -1, 0);
 
+    private Vector2 minScreen, maxScreen;
 
-    Vector2 minScreen, maxScreen;
+    public Vector3 Velocity
+    {
+        get { return velocity; }
+        set { velocity = value; }
+    }
+
+    public Vector3 Acceleration
+    {
+        get { return acceleration; }
+        set { acceleration = value; }
+    }
 
     void Start()
     {
@@ -14,7 +25,6 @@ public class Ball : MonoBehaviour
         maxScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
     }
 
-    // Update is called once per frame
     void Update()
     {
         velocity += acceleration * Time.deltaTime;
@@ -41,6 +51,5 @@ public class Ball : MonoBehaviour
         {
             velocity.x = Mathf.Abs(velocity.x);
         }
-
     }
 }
